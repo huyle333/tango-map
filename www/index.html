@@ -4,7 +4,7 @@
   * Please see the included README.md file for license terms and conditions.
   -->
 <head>
-    <title>Tango Mango</title>
+    <title>Tango</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -21,16 +21,46 @@
 </head>
 
 
-<body>
-    <h1 class="align-center">Tango</h1>
-    <br>
-    <!-- <p class="align-center">
-        <input type="button" id="id_btnHello" value="Touch Me">
-    </p> -->
-
-    <div id="map-canvas"></div>
-
-
+<body data-spy="scroll" data-target="#navigation" id="home" onload="initialize();">
+    <div class="navbar-wrapper" style="z-index: 30">
+	      <div class="container">
+	        <div class="navbar navbar-default navbar-static-top" role="navigation">
+	          <div class="container">
+	            <div class="navbar-header">
+	              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	                <span class="sr-only">Toggle navigation</span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	              </button>
+	              <b><a class="navbar-brand" href="index.html" style="color: black">Tango</a></b>
+	            </div>
+	            <div class="navbar-collapse collapse">
+	              <ul class="nav navbar-nav navbar-right">
+	                <li><a href="#">Better Buy - Search Best Buy products easier</a></li>
+	                <li><a href="about.html">About</a></li>
+                    <li><img src = "img/bestbuy-logo.png" height="50px"></li>
+	              </ul>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+    </div>
+    
+    
+    <div id = "overlay">
+        <div id = "lookup">
+            <label style = "margin-top: 20px; color: white">For item &nbsp; </label><input type = "text" placeholder = "Search item on Best Buy" name = "item" id = "itemSearch">
+            <br>
+            <label style = "color: white">For ZIP Code &nbsp; </label><input type = "text" placeholder = "Type a ZIP Code" name = "item" id = "itemSearch">
+            <input onclick="myFunction()" src = "img/search.png" type = "image" alt = "Submit" id= "submitSearch">
+            <br><br>
+            <p style = "color: #C7C7C7">Type an item and ZIP Code to see Best Buy info.</p>
+        </div>
+        <div id = "map-canvas"></div>
+    </div>
+    <div id= "displayItem">
+    
     <script src="intelxdk.js"></script>   <!-- phantom library, needed for XDK api calls -->
     <script src="cordova.js"></script>    <!-- phantom library, needed for Cordova api calls -->
     <script src="xhr.js"></script>        <!-- phantom library, needed for XDK CORS -->
