@@ -50,6 +50,18 @@ input, textarea  {
     height: 100%; 
 }
 
+.item{
+    color: white;
+}
+
+.itemname{
+    color: white;
+}
+
+.rating{
+    color: white;   
+}
+
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 

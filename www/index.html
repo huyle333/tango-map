@@ -52,8 +52,8 @@
         <div id = "lookup">
             <label style = "margin-top: 20px; color: white">For item &nbsp; </label><input type = "text" placeholder = "Search item on Best Buy" name = "item" id = "itemSearch">
             <br>
-            <label style = "color: white">For ZIP Code &nbsp; </label><input type = "text" placeholder = "Type a ZIP Code" name = "item" id = "itemSearch">
-            <input onclick="myFunction()" src = "img/search.png" type = "image" alt = "Submit" id= "submitSearch">
+            <label style = "color: white">For ZIP Code &nbsp; </label><input type = "text" placeholder = "Type a ZIP Code" name = "item" id = "searchZip">
+            <input src = "img/search.png" type = "image" alt = "Submit" id= "submitSearch"> <!-- onclick="myFunction()" -->
             <br><br>
             <p style = "color: #C7C7C7">Type an item and ZIP Code to see Best Buy info.</p>
             <div id = "bestbuyInfo"></div>
@@ -73,6 +73,7 @@
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-klagRI08vJ54c1emqvfH7M0s9Gz5b_Q">
     </script>
+    <script src = "js/jquery.2.1.1.min.js"></script>
     <script src="js/d3.min.js"></script>
     <!--<script src="js/d3js-google-maps.js"></script>-->
     <script src="js/bestbuy-map.js"></script>

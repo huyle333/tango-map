@@ -1,15 +1,26 @@
-function initialize() {
-    var mapOptions = {
+jQuery.support.cors = true;
+$.support.cors = true;
+var mapOptions = {
         center: { lat: 39.8282, lng: -98.5795},
         zoom: 5,
         mapTypeControl: false
     };
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+function initialize() {
+    
+    /*var airPollutionControl = new google.maps.LatLng(42.360200, -71.057951);
+    var airPollutionControlMarker = new google.maps.Marker({
+		icon: ('http://maps.google.com/mapfiles/kml/pal2/icon2.png'),
+		position: airPollutionControl,
+		map: map,
+		title: 'Boston Air Pollution Control'
+	});*/
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
-function myFunction(){
+/*function myFunction(){
     ifrm = document.createElement("iframe"); 
     ifrm.setAttribute("z-index", "200");
     ifrm.setAttribute("id", "book"); 
@@ -22,13 +33,11 @@ function myFunction(){
     ifrm2.document.open();
     ifrm2.document.write('<div id\="hello"></div>');
     ifrm2.document.close();
-    document.getElementById('book').contentWindow.search();
-}
+    // document.getElementById('book').contentWindow.helloWorld();
+    searchItem();
+}*/
 
-jQuery.support.cors = true;
-$.support.cors = true;
-
-function search(){
+	$("#submitSearch").click(function(){
 		var item = document.getElementById("itemSearch").value;
 		$.ajax({
 		  	url: "http://api.remix.bestbuy.com/v1/products(search="+item+")",
@@ -39,20 +48,53 @@ function search(){
 		  		apiKey: '4npra7dguufgq5575kkbdj9p'
 		  	},
 		  	success: function(response){
-		  		$('#hello').children('div').remove();
+		  		$('#bestbuyInfo').children().remove();
 		  		var data = response;
 		  		console.log(data);
+                $('#bestbuyInfo').append("<iframe id = \'iframe1\' width = '400px' height ='300px'>");
 		  		for(var i = 0; i < 10; i++){
-		  			$("#hello").append("<div class = 'item'><p class = 'itemname'> "+data.products[i].name+ "</p><p class = 'itemPrice'>"+data.products[i].salePrice+"<img src = '"+data.products[i].image+"'></div>");
-		  			if(data.products[i].customerReviewAverage == null){
-		  				$("#hello").append("<p class = 'rating'> Rating: No Review</p>");
+		  			//$("#bestbuyInfo").append("<div class = 'item'><p class = 'itemname'> "+data.products[i].name+ "</p><p class = 'itemPrice'>"+data.products[i].salePrice+"<img src = '"+data.products[i].image+"'></div>");
+		  			document.getElementById('iframe1').contentWindow.document.write("<div class = 'item' style ='color:white'><p class = 'itemname' style ='color:white'> "+data.products[i].name+ "</p><p class = 'itemPrice'> Price: "+data.products[i].salePrice+" <img src = '"+data.products[i].image+"'></div>");
+                    if(data.products[i].customerReviewAverage == null){
+		  				//$("#bestbuyInfo").append("<p class = 'rating'> Rating: No Review</p>");
+                        document.getElementById('iframe1').contentWindow.document.write("<p class = 'rating' style ='color:white'> Rating: No Review</p>");
 		  			} else {
-		  				$("#hello").append("<p class = 'rating'> Rating: "+data.products[i].customerReviewAverage+"</p>");
+		  				//$("#bestbuyInfo").append("<p class = 'rating'> Rating: "+data.products[i].customerReviewAverage+"</p>");
+                        document.getElementById('iframe1').contentWindow.document.write("<p class = 'rating' style ='color:white'> Rating: "+data.products[i].customerReviewAverage+"</p>");
 		  			}
 		  		}
 		  	}
 		});
-}
+	});
+
+$("#submitSearch").click(function(){
+	var zip = document.getElementById("searchZip").value;
+	$.ajax({
+	  	url:"http://api.remix.bestbuy.com/v1/stores(area("+zip+",20))",
+
+	  	dataType:"jsonp",
+	  	cache: true,
+	  	data: {
+	  		format: 'json',
+	  		apiKey: '4npra7dguufgq5575kkbdj9p'
+	  	},
+	  	success: function(response){
+	  		$('#bestbuyInfo').children('div').remove();
+	  		var data = response;
+	  		console.log(data);
+	  		for(var i = 0; i < 20; i++){
+	  			//$("#displayLocations").append("<div class = 'location'><p class = 'latitude'> "+data.stores[i].lat+ "</p><p class = 'longitude'>"+data.stores[i].lng+"<p class = 'storeName'>"+data.stores[i].longName +"</p></div>");
+                var airPollutionControl = new google.maps.LatLng(data.stores[i].lat, data.stores[i].lng);
+                var airPollutionControlMarker = new google.maps.Marker({
+                    icon: ('http://maps.google.com/mapfiles/kml/pal2/icon2.png'),
+                    position: airPollutionControl,
+                    map: map,
+                    title: data.stores[i].longName
+                });
+	  		}
+	  	}
+	});
+});
 
 function insertAfter( referenceNode, newNode ){
     referenceNode.parentNode.insertBefore( newNode, referenceNode.nextSibling );
