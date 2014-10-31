@@ -54,13 +54,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
                 $('#bestbuyInfo').append("<iframe id = \'iframe1\' width = '400px' height ='300px'>");
 		  		for(var i = 0; i < 10; i++){
 		  			//$("#bestbuyInfo").append("<div class = 'item'><p class = 'itemname'> "+data.products[i].name+ "</p><p class = 'itemPrice'>"+data.products[i].salePrice+"<img src = '"+data.products[i].image+"'></div>");
-		  			document.getElementById('iframe1').contentWindow.document.write("<div class = 'item' style ='color:white'><p class = 'itemname' style ='color:white'> "+data.products[i].name+ "</p><p class = 'itemPrice'> Price: "+data.products[i].salePrice+" <img src = '"+data.products[i].image+"'></div>");
+		  			document.getElementById('iframe1').contentWindow.document.write("<div class = 'item' style ='color:white;word-break: break-all; text-align: center; font-family: sans-serif;font-size: 15px;'><p class = 'itemname' style ='color:white;word-break: break-all; text-align: center; font-family: sans-serif;font-size: 15px;'> "+data.products[i].name+ "</p><p class = 'itemPrice'> Price: "+data.products[i].salePrice+" <img style= 'display: block;margin: 0 auto;' src = '"+data.products[i].image+"'></div>");
                     if(data.products[i].customerReviewAverage == null){
 		  				//$("#bestbuyInfo").append("<p class = 'rating'> Rating: No Review</p>");
-                        document.getElementById('iframe1').contentWindow.document.write("<p class = 'rating' style ='color:white'> Rating: No Review</p>");
+                        document.getElementById('iframe1').contentWindow.document.write("<p class = 'rating' style ='color:white;word-break: break-all; text-align: center; font-family: sans-serif;font-size: 15px;'> Rating: No Review</p>");
 		  			} else {
 		  				//$("#bestbuyInfo").append("<p class = 'rating'> Rating: "+data.products[i].customerReviewAverage+"</p>");
-                        document.getElementById('iframe1').contentWindow.document.write("<p class = 'rating' style ='color:white'> Rating: "+data.products[i].customerReviewAverage+"</p>");
+                        document.getElementById('iframe1').contentWindow.document.write("<p class = 'rating' style ='color:white;word-break: break-all; text-align: center; font-family: sans-serif;font-size: 15px;'> Rating: "+data.products[i].customerReviewAverage+"</p>");
 		  			}
 		  		}
 		  	}
@@ -84,14 +84,16 @@ $("#submitSearch").click(function(){
 	  		console.log(data);
 	  		for(var i = 0; i < 20; i++){
 	  			//$("#displayLocations").append("<div class = 'location'><p class = 'latitude'> "+data.stores[i].lat+ "</p><p class = 'longitude'>"+data.stores[i].lng+"<p class = 'storeName'>"+data.stores[i].longName +"</p></div>");
-                var airPollutionControl = new google.maps.LatLng(data.stores[i].lat, data.stores[i].lng);
-                var airPollutionControlMarker = new google.maps.Marker({
+                var bestBuyLocation = new google.maps.LatLng(data.stores[i].lat, data.stores[i].lng);
+                var bestBuyLocationMarker = new google.maps.Marker({
                     icon: ('http://maps.google.com/mapfiles/kml/pal2/icon2.png'),
-                    position: airPollutionControl,
+                    position: bestBuyLocation,
                     map: map,
                     title: data.stores[i].longName
                 });
 	  		}
+            //map.setZoom(17);
+            //map.panTo(data.stores[0]);
 	  	}
 	});
 });
